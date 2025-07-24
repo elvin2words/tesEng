@@ -13,7 +13,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
       // Optional: if you ensure these folders exist within client/ or via workspaces
-      // "@shared": path.resolve(__dirname, "../shared"),
+      "@shared": path.resolve(__dirname, "../shared"),
       // "@assets": path.resolve(__dirname, "../attached_assets"),
     },
   },
