@@ -3,29 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Home, Bot, Building2, Tractor, ArrowRight, MapPin, Zap, Battery, Sun } from "lucide-react";
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query"; 
+// import type { Project } from "@shared/schema";
 
-// Minimal Project interface based on API + featuredProjects extra fields (optional)
+
 interface Project {
   id: number;
   title: string;
   location: string;
-  capacity?: string;
+  capacity: string;
   description: string;
   status: string;
   imageUrl?: string | null;
-  createdAt: string; // or Date if parsed
-  // optional extra fields matching featuredProjects:
-  challenge?: string;
-  systemSize?: string;
-  batteryStorage?: string;
-  inverter?: string;
-  savings?: string;
-  features?: string[];
-  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  ctaText?: string;
-  ctaLink?: string;
-  statusColor?: string;
+  createdAt: string;  // or Date if you parse it
 }
 
 const getStatusColor = (status: string) => {
@@ -36,17 +26,16 @@ const getStatusColor = (status: string) => {
       return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
     case "planning":
       return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-    case "concept design":
-      return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
     default:
       return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
   }
 };
 
-const featuredProjects: Project[] = [
+const featuredProjects = [
   {
     id: 1,
     title: "Freedom Home - Glen Lorne",
+    category: "Residential",
     location: "Glen Lorne, Harare",
     status: "Concept Design",
     statusColor: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
@@ -58,13 +47,14 @@ const featuredProjects: Project[] = [
     description: "Hybrid solar system optimized for backup and daily usage with load prioritization for essential loads.",
     features: ["12 x 415W panels", "Load Prioritization System", "Uninterrupted evening power", "Zero generator costs"],
     icon: Home,
-    imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     ctaText: "See More Residential Designs",
-    ctaLink: "/projects/residential",
+    ctaLink: "/projects/residential"
   },
   {
     id: 2,
     title: "Smart Retail Backup - Avondale Grocery",
+    category: "Commercial",
     location: "Avondale, Harare",
     status: "Planned Deployment",
     statusColor: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
@@ -76,13 +66,14 @@ const featuredProjects: Project[] = [
     description: "Clean, quiet alternative to aging diesel generator with solar shade parking structure.",
     features: ["Roof & awning installation", "WiFi monitoring dashboard", "Smart load shedding", "3-year ROI"],
     icon: Building2,
-    imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     ctaText: "Explore Commercial Solutions",
-    ctaLink: "/projects/commercial",
+    ctaLink: "/projects/commercial"
   },
   {
     id: 3,
     title: "Solar-Powered Cold Room - Mutoko Farmers' Co-op",
+    category: "Agricultural",
     location: "Mutoko, Mashonaland East",
     status: "Community Pilot",
     statusColor: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
@@ -94,19 +85,17 @@ const featuredProjects: Project[] = [
     description: "Off-grid solution preserving 3 tons of produce per week with smart switching for cloudy days.",
     features: ["Cold room power", "Irrigation pump", "Office lighting", "Upgradeable hardware"],
     icon: Tractor,
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
     ctaText: "Partner with TES for OffGrid Setups",
-    ctaLink: "/projects/agricultural",
-  },
+    ctaLink: "/projects/agricultural"
+  }
 ];
 
 export default function ProjectsSection() {
   const { data: projects, isLoading, error } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
-    queryFn: () => fetch("/api/projects").then((res) => res.json()),
+    queryFn: () => fetch("/api/projects").then(res => res.json()),
   });
-
-  const projectsToRender = projects && projects.length > 0 ? projects : featuredProjects;
 
   const handleScrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -152,140 +141,122 @@ export default function ProjectsSection() {
             <div className="col-span-full text-center py-8">
               <p className="text-red-600 dark:text-red-400">Failed to load projects</p>
             </div>
-          ) : !projectsToRender || projectsToRender.length === 0 ? (
+          ) : !projects || projects.length === 0 ? (
             <div className="col-span-full text-center py-8">
               <p className="text-muted-foreground">No projects found</p>
             </div>
           ) : (
-            projectsToRender.map((project, index) => {
-              // Fallback icon
-              const IconComponent = project.icon || Home;
-              const statusColor = project.statusColor || getStatusColor(project.status);
+            featuredProjects.map((project, index) => (
+            <Card 
+              key={project.id} 
+              className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group card-hover border-0"
+              style={{animationDelay: `${index * 0.1}s`}}
+            >
+              <div className="relative overflow-hidden">
+                <img 
+                  src={project.image} 
+                  // src={project.imageUrl || "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"} 
+                  alt={project.title}
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4">
+                  <Badge className={`text-xs font-semibold px-2.5 py-1 ${project.statusColor}`}>
+                    {project.status}
+                  </Badge>
+                </div>
+                <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2">
+                  <project.icon className="w-5 h-5 text-solar-orange" />
+                </div>
+              </div>
+              
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                  <MapPin className="w-4 h-4" />
+                  <span>{project.location}</span>
+                </div>
 
-              return (
-                <Card
-                  key={project.id}
-                  className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group card-hover border-0"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={
-                        project.imageUrl ||
-                        // fallback images for featuredProjects keys that use image instead of imageUrl
-                        // @ts-ignore
-                        project.image ||
-                        "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                      }
-                      alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge className={`text-xs font-semibold px-2.5 py-1 ${statusColor}`}>
-                        {project.status}
-                      </Badge>
+                <h3 className="text-xl font-bold mb-3 text-foreground">
+                  {project.title}
+                </h3>
+                
+                <p className="text-sm text-muted-foreground mb-4 italic">
+                  "{project.challenge}"
+                </p>
+
+                <p className="text-sm text-muted-foreground mb-4">
+                  {project.description}
+                </p>
+
+                {/* System Specs */}
+                <div className="grid grid-cols-1 gap-3 mb-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <Sun className="w-4 h-4 text-solar-orange" />
+                      <span className="font-medium">System:</span>
                     </div>
-                    <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2">
-                      <IconComponent className="w-5 h-5 text-solar-orange" />
-                    </div>
+                    <span className="text-muted-foreground">{project.systemSize}</span>
                   </div>
-
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                      <MapPin className="w-4 h-4" />
-                      <span>{project.location}</span>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <Battery className="w-4 h-4 text-solar-blue" />
+                      <span className="font-medium">Storage:</span>
                     </div>
+                    <span className="text-muted-foreground">{project.batteryStorage}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-solar-yellow" />
+                      <span className="font-medium">Savings:</span>
+                    </div>
+                    <span className="text-green-600 font-semibold">{project.savings}</span>
+                  </div>
+                </div>
 
-                    <h3 className="text-xl font-bold mb-3 text-foreground">{project.title}</h3>
-
-                    {project.challenge && (
-                      <p className="text-sm text-muted-foreground mb-4 italic">"{project.challenge}"</p>
-                    )}
-
-                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-
-                    {/* System Specs */}
-                    {(project.systemSize || project.batteryStorage || project.savings) && (
-                      <div className="grid grid-cols-1 gap-3 mb-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        {project.systemSize && (
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              <Sun className="w-4 h-4 text-solar-orange" />
-                              <span className="font-medium">System:</span>
-                            </div>
-                            <span className="text-muted-foreground">{project.systemSize}</span>
-                          </div>
-                        )}
-                        {project.batteryStorage && (
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              <Battery className="w-4 h-4 text-solar-blue" />
-                              <span className="font-medium">Storage:</span>
-                            </div>
-                            <span className="text-muted-foreground">{project.batteryStorage}</span>
-                          </div>
-                        )}
-                        {project.savings && (
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              <Zap className="w-4 h-4 text-solar-yellow" />
-                              <span className="font-medium">Savings:</span>
-                            </div>
-                            <span className="text-green-600 font-semibold">{project.savings}</span>
-                          </div>
-                        )}
+                {/* Key Features */}
+                <div className="mb-6">
+                  <h4 className="font-semibold text-sm mb-2">Key Features:</h4>
+                  <div className="grid grid-cols-1 gap-1">
+                    {project.features.slice(0, 2).map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-xs text-muted-foreground">
+                        <div className="w-1.5 h-1.5 bg-solar-orange rounded-full mr-2 flex-shrink-0" />
+                        <span>{feature}</span>
                       </div>
-                    )}
+                    ))}
+                  </div>
+                </div>
 
-                    {/* Key Features */}
-                    {project.features && project.features.length > 0 && (
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-sm mb-2">Key Features:</h4>
-                        <div className="grid grid-cols-1 gap-1">
-                          {project.features.slice(0, 2).map((feature, idx) => (
-                            <div key={idx} className="flex items-center text-xs text-muted-foreground">
-                              <div className="w-1.5 h-1.5 bg-solar-orange rounded-full mr-2 flex-shrink-0" />
-                              <span>{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                <Link href={project.ctaLink}>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full hover:underline  justify-between text-foreground hover:text-solar-orange hover:bg-solar-orange/10 transition-all"
+                  >
+                    {project.ctaText}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
 
-                    {/* Call to Action */}
-                    {project.ctaLink && project.ctaText && (
-                      <Link href={project.ctaLink}>
-                        <Button
-                          variant="ghost"
-                          className="w-full hover:underline justify-between text-foreground hover:text-solar-orange hover:bg-solar-orange/10 transition-all"
-                        >
-                          {project.ctaText}
-                          <ArrowRight className="w-4 h-4" />
-                        </Button>
-                      </Link>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })
-          )}
+              </CardContent>
+            </Card>
+            ))
+          )
+        }
         </div>
 
         {/* Mini Case Study */}
         <div className="max-w-5xl mx-auto mb-16 animate-fade-in-up">
           <Card className="bg-gradient-to-br from-solar-orange/10 to-solar-blue/10 dark:from-solar-orange/20 dark:to-solar-blue/20 border-0 rounded-2xl shadow-lg">
             <CardContent className="p-6 sm:p-10 space-y-8">
+              
               {/* Header */}
               <div className="text-center">
                 <Badge className="bg-solar-orange text-white text-xs uppercase tracking-wider mb-4">
                   Powered by SmartTES AI
                 </Badge>
                 <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                  Anonymous Client - Waterfalls, ZW
+                 Anonymous Client - Waterfalls, ZW
                 </h3>
                 <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-                  See how SmartTES AI interprets household needs, applies optimization algorithms, and instantly
-                  generates an intelligent energy system — with install-ready specs.
+                  See how SmartTES AI interprets household needs, applies optimization algorithms, and instantly generates an intelligent energy system — with install-ready specs.
                 </p>
               </div>
 
@@ -346,9 +317,7 @@ export default function ProjectsSection() {
                     </div>
                     <div className="flex justify-between">
                       <span>🧠 Optimization Logic:</span>
-                      <span className="italic text-xs text-right">
-                        Energy profile + Weather Profile + Fault Tolerance
-                      </span>
+                      <span className="italic text-xs text-right">Energy profile + Weather Profile + Fault Tolerance</span>
                     </div>
                   </div>
                 </div>
@@ -357,8 +326,7 @@ export default function ProjectsSection() {
               {/* Result Summary */}
               <div className="text-center">
                 <p className="text-sm sm:text-base text-muted-foreground mb-4">
-                  ✅ SmartTES instantly generates a downloadable system report, and matches the client with certified
-                  installers in the area.
+                  ✅ SmartTES instantly generates a downloadable system report, and matches the client with certified installers in the area.
                 </p>
                 <Link href="/sizing-tool">
                   <Button className="bg-solar-orange text-white hover:bg-orange-600 px-6 py-3 text-sm sm:text-base font-medium rounded-full transition-transform transform hover:scale-105">
@@ -369,6 +337,7 @@ export default function ProjectsSection() {
             </CardContent>
           </Card>
         </div>
+
 
         <div className="text-center">
           <Button
