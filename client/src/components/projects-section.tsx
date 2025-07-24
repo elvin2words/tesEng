@@ -3,8 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Home, Bot, Building2, Tractor, ArrowRight, MapPin, Zap, Battery, Sun } from "lucide-react";
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
-import type { Project } from "@shared/schema";
+import { useQuery } from "@tanstack/react-query"; 
+// import type { Project } from "@shared/schema";
+
+
+interface Project {
+  id: number;
+  title: string;
+  location: string;
+  capacity: string;
+  description: string;
+  status: string;
+  imageUrl?: string | null;
+  createdAt: string;  // or Date if you parse it
+}
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {

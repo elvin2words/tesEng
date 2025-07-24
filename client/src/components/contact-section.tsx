@@ -7,14 +7,24 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { MapPin, Phone, Mail, Check, MessageCircle, Bot, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactSubmissionSchema } from "@shared/schema";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { insertContactSubmissionSchema } from "@shared/schema";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { z } from "zod";
 import { useState, useEffect } from "react";
 
-type ContactFormData = z.infer<typeof insertContactSubmissionSchema>;
+// type ContactFormData = z.infer<typeof insertContactSubmissionSchema>;
+
+type ContactFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
+  projectType: string;
+  message: string;
+};
+
 
 export default function ContactSection() {
   const [mapOpen, setMapOpen] = useState(false);
@@ -55,8 +65,19 @@ export default function ContactSection() {
     console.log('Form submitted');
   };
 
+  // const form = useForm<ContactFormData>({
+  //   resolver: zodResolver(insertContactSubmissionSchema),
+  //   defaultValues: {
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     company: "",
+  //     projectType: "",
+  //     message: ""
+  //   }
+  // });
+
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(insertContactSubmissionSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -66,6 +87,7 @@ export default function ContactSection() {
       message: ""
     }
   });
+
 
   const contactMutation = useMutation({
     mutationFn: (data: ContactFormData) =>
