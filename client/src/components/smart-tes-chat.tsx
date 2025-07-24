@@ -412,8 +412,8 @@ export default function SmartTESChat({ isFloating = true, onSolarSizingRequest, 
           >
             {/* Smart Popup */}
 
-
-
+            
+            
             {/* Floating Button */}
             <Button
               onClick={handleOpenChat}
