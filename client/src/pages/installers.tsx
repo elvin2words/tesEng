@@ -46,7 +46,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Master Installer, Solar Energy Technician",
     rating: 5,
     totalInstalls: 145,
-    imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Expert in residential and commercial solar installations with focus on energy storage solutions.",
     isActive: true
   },
@@ -59,7 +59,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Senior Installer, Industrial Systems Specialist",
     rating: 5,
     totalInstalls: 98,
-    imageUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1494790108755-2616b612b47c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Specializes in large-scale industrial installations and mining sector solar solutions.",
     isActive: true
   },
@@ -72,7 +72,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Installer, Off-grid Systems Expert",
     rating: 5,
     totalInstalls: 87,
-    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Expert in rural and agricultural installations, specializing in off-grid solar pumping systems.",
     isActive: true
   },
@@ -85,7 +85,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Installer, Maintenance Specialist",
     rating: 5,
     totalInstalls: 63,
-    imageUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Focuses on residential installations and comprehensive maintenance services.",
     isActive: true
   },
@@ -98,7 +98,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Senior Installer, Grid-tie Specialist",
     rating: 5,
     totalInstalls: 112,
-    imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Expert in commercial and industrial grid-tie systems with extensive project management experience.",
     isActive: true
   },
@@ -111,7 +111,7 @@ const sampleInstallers: Installer[] = [
     certifications: "TES Certified Installer, Training Coordinator",
     rating: 5,
     totalInstalls: 45,
-    imageUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
+    imageUrl: "/images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400",
     description: "Experienced installer who also conducts technical training for new technicians.",
     isActive: true
   }
@@ -241,7 +241,7 @@ export default function Installers() {
                 <CardHeader className="text-center pb-4">
                   <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                     <img
-                      src={installer.imageUrl || `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200`}
+                      src={installer.imageUrl || `/images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200`}
                       alt={installer.name}
                       className="w-full h-full object-cover"
                     />
@@ -314,7 +314,7 @@ export default function Installers() {
                           <div className="space-y-4">
                             <div className="text-center">
                               <img
-                                src={installer.imageUrl || `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200`}
+                                src={installer.imageUrl || `/images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200`}
                                 alt={installer.name}
                                 className="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
                               />
