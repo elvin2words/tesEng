@@ -260,7 +260,7 @@ export default function ContactSection() {
                   href="https://wa.me/263771234567"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow-md transition"
+                  className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow-md transition"
                   aria-label="Contact on WhatsApp"
                 >
                   <Bot className="w-5 h-5" />
@@ -270,7 +270,7 @@ export default function ContactSection() {
                   href="https://twitter.com/tesafrica"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition"
+                  className="flex justify-center items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition"
                   aria-label="Follow us on Twitter"
                 >
                   <Twitter className="w-5 h-5" />
@@ -280,7 +280,7 @@ export default function ContactSection() {
                   href="https://facebook.com/tesafrica"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-yellow-800 hover:bg-blue-800 text-white px-4 py-2 rounded-md shadow-md transition"
+                  className="flex justify-center items-center gap-2 bg-yellow-800 hover:bg-blue-800 text-white px-4 py-2 rounded-md shadow-md transition"
                   aria-label="Visit us on Facebook"
                 >
                   <Linkedin className="w-5 h-5" />
@@ -335,7 +335,7 @@ export default function ContactSection() {
                   </a>
 
                   <a
-                    href="mailto:hello@tesafrica.co.zw"
+                    href="mailto:hello@tesengineering.co.zw"
                     className="flex items-start w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2"
                   >
                     <div className="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center mr-4">
@@ -344,9 +344,9 @@ export default function ContactSection() {
                     <div>
                       <h4 className="font-semibold">Email</h4>
                       <p className="text-sm text-muted-foreground">
-                        hello@tesafrica.co.zw
+                        contact@tesengineering.co.zw
                         <br />
-                        support@smarttes.co.zw
+                        support@tesengineering.co.zw
                       </p>
                     </div>
                   </a>
@@ -379,34 +379,37 @@ export default function ContactSection() {
                 </Button> */}
 
                 {/* Contact buttons */}
-                <div className="flex flex-wrap gap-2 mb-0">
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
                   <a
                     href="https://wa.me/263771234567"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-orange-600 hover:bg-green-700 px-4 py-2 rounded-md shadow-md transition"
+                    className="flex justify-center items-center gap-2 bg-orange-600 hover:bg-green-700 px-4 py-2 rounded-md shadow-md transition w-full"
                   >
                     {/* <Bot className="w-5 h-5" /> */}
                     Schedule Consultation
                   </a>
-                  <a
-                    href="https://facebook.com/tesafrica"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-md shadow-md transition"
-                  >
-                    <Facebook className="w-5 h-5" />
-                    Facebook
-                  </a>
-                  <a
-                    href="https://instagram.com/tesafrica"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-md shadow-md transition"
-                  >
-                    <Instagram className="w-5 h-5" />
-                    Instagram
-                  </a>
+                  {/* <div className="flex flex-col sm:flex-row gap-2 justify-center sm:justify-start"> */}
+                  <div className="flex flex-wrap sm:flex-row gap-2 w-full justify-center sm:justify-start">
+                    <a
+                      href="https://facebook.com/tesafrica"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center sm:w-auto gap-2 bg-blue-700 hover:bg-blue-800 px-2 py-2 rounded-md shadow-md transition"
+                    >
+                      <Facebook className="w-5 h-5" />
+                      Facebook
+                    </a>
+                    <a
+                      href="https://instagram.com/tesafrica"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center sm:w-auto gap-2 bg-pink-600 hover:bg-pink-700 px-2 py-2 rounded-md shadow-md transition"
+                    >
+                      <Instagram className="w-5 h-5" />
+                      Instagram
+                    </a>
+                  </div>
                 </div>
               </CardContent>
             </Card>

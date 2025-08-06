@@ -9,6 +9,8 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import TESLogo from "./tes-logo";
+import { useRef } from "react";
+import SmartLink from "./SmartLink";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +23,9 @@ export default function Navigation() {
   const [showContactDropdown, setShowContactDropdown] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [location, setLocation] = useLocation();
-
+  const searchRef = useRef<HTMLDivElement>(null);
+  const mobilePopupRef = useRef<HTMLDivElement>(null);
+  
   const servicesDropdown = [
     { name: "Installation", description: "Professional setup", link: "/installation#install", icon: Hammer },
     { name: "Maintenance", description: "System upkeep", link: "/maintenance#maintain", icon: Wrench },
@@ -56,12 +60,38 @@ export default function Navigation() {
   }, [location, setLocation]);
 
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShowSearch(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setShowSearch(false);
+      }
+      if (mobilePopupRef.current && !mobilePopupRef.current.contains(e.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
     };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowSearch(false);
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKey);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKey);
+    };
   }, []);
+
+  // useEffect(() => {
+  //   const handleKey = (e: KeyboardEvent) => {
+  //     if (e.key === "Escape") setShowSearch(false);
+  //   };
+  //   window.addEventListener("keydown", handleKey);
+  //   return () => window.removeEventListener("keydown", handleKey);
+  // }, []);
 
   const handleNavClick = (hash: string) => {
     setIsMobileMenuOpen(false);
@@ -86,11 +116,11 @@ export default function Navigation() {
         {/* Top Row */}
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/">
+          <SmartLink to="/">
             <div className="cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200">
               <TESLogo size="default" />
             </div>
-          </Link>
+          </SmartLink>
 
           {/* <div className="flex items-center">
             <div className="text-xl md:text-2xl font-bold gradient-text flex items-center animate-fade-in">
@@ -151,14 +181,16 @@ export default function Navigation() {
             </div>   */}
             <div className="relative group">
               <button 
+                aria-haspopup="true"
+                aria-expanded={activeDropdown === "services"}
                 onClick={() => handleNavClick("#services")}
-                className="flex items-center text-sm text-foreground hover:text-solar-orange transition-all hover:scale-105">
+                className="flex items-center scroll-offset text-sm text-foreground hover:text-solar-orange transition-all hover:scale-105">
                 Services <ChevronDown className="w-4 h-4 ml-1" />
               </button>
               <div className="absolute top-full left-0 mt-2 w-60 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                 <div className="p-2">
                   {servicesDropdown.map(({ name, description, link, icon: Icon }, i) => (
-                    <Link href={link} key={i}>
+                    <SmartLink to={link} key={i}>
                       <button className="flex items-start w-full text-left p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all hover:scale-105">
                         <Icon className="w-4 h-4 mr-2 mt-1 text-solar-blue" />
                         <div>
@@ -166,7 +198,7 @@ export default function Navigation() {
                           <div className="text-sm text-muted-foreground">{description}</div>
                         </div>
                       </button>
-                    </Link>
+                    </SmartLink>
                   ))}
                 </div>
               </div>
@@ -215,6 +247,8 @@ export default function Navigation() {
             </div> */}
             <div className="relative group">
               <button 
+                aria-haspopup="true"
+                aria-expanded={activeDropdown === "projects"}
                 onClick={() => handleNavClick("#projects")}
                 className="flex items-center text-sm text-foreground hover:text-solar-orange transition-all hover:scale-105">
                 Projects <ChevronDown className="w-4 h-4 ml-1" />
@@ -222,7 +256,7 @@ export default function Navigation() {
               <div className="absolute top-full left-0 mt-2 w-60 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                 <div className="p-2">
                   {projectsDropdown.map(({ name, description, link, icon: Icon }, i) => (
-                    <Link href={link} key={i}>
+                    <SmartLink to={link} key={i}>
                       <button className="flex items-start w-full text-left p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all hover:scale-105">
                         <Icon className="w-4 h-4 mr-2 mt-1 text-solar-blue" />
                         <div>
@@ -230,7 +264,7 @@ export default function Navigation() {
                           <div className="text-sm text-muted-foreground">{description}</div>
                         </div>
                       </button>
-                    </Link>
+                    </SmartLink>
                   ))}
                 </div>
               </div>
@@ -238,13 +272,13 @@ export default function Navigation() {
 
             <button onClick={() => handleNavClick("#about")} className="text-sm text-foreground hover:text-solar-orange transition-all hover:scale-105">About TES</button>
 
-            <Link href="/sizing-tool">
+            <SmartLink to="/sizing-tool">
               <button className="flex items-center space-x-1 text-sm text-foreground hover:text-solar-orange transition-all hover:scale-105">
                 <Bot className="w-4 h-4" />
                 <span>SystemSizing</span>
                 {/* <Badge className="bg-solar-blue text-white text-xs">AI</Badge> */}
               </button>
-            </Link>
+            </SmartLink>
 
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-foreground hover:text-solar-orange transition-all hover:scale-110">
               {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
@@ -334,7 +368,10 @@ export default function Navigation() {
         {/* Mobile Menu Popup */}
         {isMobileMenuOpen && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="md:hidden absolute inset-x-4 top-20 z-50" onClick={(e) => e.stopPropagation()}>
+            <div ref={mobilePopupRef} 
+              className="md:hidden absolute inset-x-4 top-20 z-50" onClick={(e) => e.stopPropagation()}
+            //  className="md:hidden w-full max-w-md bg-white/90 dark:bg-gray-900/90 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-6 space-y-4 transition-all animate-fade-in-down"
+             >
               <div className="bg-white/90 dark:bg-gray-900/90 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-6 space-y-4 transition-all animate-fade-in-down">
                 <div className="space-y-1">
                   {/* <button onClick={handleHomeClick} className="block w-full text-center text-lg font-semibold hover:text-solar-orange transition-all" > Home </button> */}
@@ -355,7 +392,7 @@ export default function Navigation() {
                   // {/* {isServicesOpen && ( */}
                       <div className="bg-white/60 dark:bg-gray-800 rounded-xl border p-3 space-y-2">
                         {servicesDropdown.map(({ name, description, link, icon: Icon }, i) => (
-                          <Link href={link} key={i}>
+                          <SmartLink to={link} key={i}>
                             <button onClick={() => setIsMobileMenuOpen(false)} 
                               className="flex items-start w-full px-2 py-2 text-left text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
                               <Icon className="w-4 h-4 mr-2 mt-1 text-solar-blue" />
@@ -364,7 +401,7 @@ export default function Navigation() {
                                 <div className="text-sm text-muted-foreground">{description}</div>
                               </div>
                             </button>
-                          </Link>
+                          </SmartLink>
                         ))}
                       </div>
                   )}
@@ -388,7 +425,7 @@ export default function Navigation() {
                   // {/* {isProjectsOpen && ( */}
                       <div className="bg-white/60 dark:bg-gray-800 rounded-xl border p-3 space-y-2">
                         {projectsDropdown.map(({ name, description, link, icon: Icon }, i) => (
-                          <Link href={link} key={i}>
+                          <SmartLink to={link} key={i}>
                             <button onClick={() => setIsMobileMenuOpen(false)} className="flex items-start w-full px-2 py-2 text-left text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
                               <Icon className="w-4 h-4 mr-2 mt-1 text-solar-blue" />
                               <div>
@@ -396,7 +433,7 @@ export default function Navigation() {
                                 <div className="text-sm text-muted-foreground">{description}</div>
                               </div>
                             </button>
-                          </Link>
+                          </SmartLink>
                         ))}
                       </div>
                   )}
@@ -410,7 +447,7 @@ export default function Navigation() {
                 </div>
 
                 <div className="space-y-1">
-                  <Link href="/sizing-tool">
+                  <SmartLink to="/sizing-tool">
                     <button onClick={() => setIsMobileMenuOpen(false)} 
                       // className="flex justify-center items-center w-full py-2 rounded-xl hover:scale-105 transition-all border border-gray-300 dark:border-gray-700"
                       className="block w-full text-center py-3 text-base font-medium transition-all hover:scale-105"
@@ -419,7 +456,7 @@ export default function Navigation() {
                       <span>SizingTool</span>
                       <Badge className="ml-2 bg-solar-blue text-white text-xs">AI</Badge>
                     </button>
-                  </Link>
+                  </SmartLink>
                 </div>
 
                 <div className="space-y-1">
@@ -438,11 +475,16 @@ export default function Navigation() {
                     // className="flex flex-col items-center gap-2 mt-2 text-sm"
                       className="flex flex-col items-center gap-2 bg-white/60 dark:bg-gray-800 rounded-xl border p-3 space-y-2"
                     >
-                      <a href="https://wa.me/263xxxxxxx" target="_blank" className="flex items-center gap-2 hover:text-green-500"><Bot className="w-4 h-4" />WhatsApp</a>
-                      <a href="tel:+263xxxxxxx" className="flex items-center gap-2 hover:text-blue-500"><Phone className="w-4 h-4" />Call</a>
-                      <a href="https://maps.google.com" target="_blank" className="flex items-center gap-2 hover:text-solar-orange"><MapPin className="w-4 h-4" />Location</a>
-                      <a href="https://instagram.com" target="_blank" className="flex items-center gap-2 hover:text-pink-500"><Instagram className="w-4 h-4" />Instagram</a>
-                      <a href="https://facebook.com" target="_blank" className="flex items-center gap-2 hover:text-blue-700"><Facebook className="w-4 h-4" />Facebook</a>
+                      <a href="https://wa.me/263xxxxxxx" target="_blank" 
+                        className="flex justify-center items-center gap-2 w-full py-2 rounded-md hover:text-green-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"><Bot className="w-4 h-4" />WhatsApp</a>
+                      <a href="tel:+263xxxxxxx" 
+                        className="flex justify-center items-center gap-2 w-full py-2 rounded-md hover:text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"><Phone className="w-4 h-4" />Call</a>
+                      <a href="https://maps.google.com" target="_blank" 
+                        className="flex justify-center items-center gap-2 w-full py-2 rounded-md hover:text-orange-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"><MapPin className="w-4 h-4" />Location</a>
+                      <a href="https://instagram.com" target="_blank" 
+                        className="flex justify-center items-center gap-2 w-full py-2 rounded-md hover:text-pink-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"><Instagram className="w-4 h-4" />Instagram</a>
+                      <a href="https://facebook.com" target="_blank" 
+                        className="flex justify-center items-center gap-2 w-full py-2 rounded-md hover:text-blue-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"><Facebook className="w-4 h-4" />Facebook</a>
                     </div>
                   )}                
                 </div>
@@ -455,7 +497,8 @@ export default function Navigation() {
         {/* Search Popup */}
         {showSearch && (
           <div className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-md px-4 z-50">
-            <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl shadow-lg p-4 backdrop-blur-md">
+          {/* <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-start justify-center pt-20"> */}
+            <div ref={searchRef} className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl shadow-lg p-4 backdrop-blur-md">
               <div className="flex items-center">
                 <Search className="w-5 h-5 text-muted-foreground mr-2" />
                 <input type="text" placeholder="Search for catalogs, services, projects...." className="w-full bg-transparent outline-none text-foreground placeholder:text-muted-foreground" autoFocus />

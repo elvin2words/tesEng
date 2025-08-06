@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sun, Factory, Wrench, Battery, Lightbulb, GraduationCap, Check, ChevronDown } from "lucide-react";
 import { Link } from "wouter"; // or 'next/link' or 'react-router-dom'
 import { cn } from "@/lib/utils"; // Optional utility if you're using classnames
+import SmartLink from "./SmartLink";
+
 
 const services = [ 
   {
@@ -69,7 +71,7 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
-            <Link key={index} href={service.href} className="group block focus:outline-none">
+            <SmartLink key={index} to={service.href} className="group block focus:outline-none">
               <Card
                 className={cn(
                   "bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 card-hover border border-transparent group-hover:border-solar-orange/70",
@@ -97,7 +99,7 @@ export default function ServicesSection() {
                   </ul>
                 </CardContent>
               </Card>
-            </Link>
+            </SmartLink>
           ))}
         </div>
       </div>

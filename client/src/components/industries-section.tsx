@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Home, Building, Factory, BookOpenCheck, Mountain, Wheat, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import SmartLink from "./SmartLink";
 
 const industries = [
   {
@@ -12,7 +13,7 @@ const industries = [
     features: ["Rooftop installations", "Home backup systems", "Grid-tie solutions"],
     color: "text-solar-orange",
     bgColor: "bg-orange-50 dark:bg-orange-900/20",
-    href: "/residential"
+    href: "/residential#res"
   },
   {
     icon: Building,
@@ -21,7 +22,7 @@ const industries = [
     features: ["Cost reduction", "Energy independence", "Sustainability goals"],
     color: "text-solar-blue",
     bgColor: "bg-blue-50 dark:bg-blue-900/20",
-    href: "/commercial"
+    href: "/commercial#biz"
   },
   {
     icon: Factory,
@@ -30,7 +31,7 @@ const industries = [
     features: ["High-capacity systems", "Process optimization", "Load management"],
     color: "text-solar-yellow",
     bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-    href: "/industrial"
+    href: "/industrial#industry"
   },
   {
     icon: Mountain,
@@ -39,7 +40,7 @@ const industries = [
     features: ["Off-grid solutions", "24/7 reliability", "Harsh environment design"],
     color: "text-gray-600",
     bgColor: "bg-gray-50 dark:bg-gray-800",
-    href: "/mining"
+    href: "/mining#mine"
   },
   {
     icon: Wheat,
@@ -48,7 +49,7 @@ const industries = [
     features: ["Irrigation pumping", "Cold storage", "Processing facilities"],
     color: "text-green-600",
     bgColor: "bg-green-50 dark:bg-green-900/20",
-    href: "/agricultural"
+    href: "/agricultural#agric"
   },
   // {
   //   icon: BookOpenCheck,
@@ -103,7 +104,7 @@ export default function IndustriesSection() {
                     </li>
                   ))}
                 </ul>
-                <Link href={industry.href}>
+                <SmartLink to={industry.href}>
                   <Button 
                     variant="ghost" 
                     className="w-full justify-between text-foreground hover:text-solar-orange mt-auto"
@@ -111,7 +112,7 @@ export default function IndustriesSection() {
                     Learn More
                     <ArrowRight className="w-4 h-4" />
                   </Button>
-                </Link>
+                </SmartLink>
               </CardContent>
             </Card>
           ))}

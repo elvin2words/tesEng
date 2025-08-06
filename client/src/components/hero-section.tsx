@@ -73,8 +73,6 @@ export default function HeroSection() {
       {/* <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" /> */}
       <div className="absolute inset-0 gradient-overlay" />
 
-
-
       {/* Animated floating elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-24 h-24 md:w-32 md:h-32 bg-solar-yellow/20 rounded-full blur-3xl animate-float" />
@@ -89,7 +87,6 @@ export default function HeroSection() {
         <div className="text-lg sm:text-3xl font-bold text-tes-secondary leading-snug">45,000</div>
         <div className="text-xs sm:text-lg text-tes-secondary">kWh +</div>
       </div>
-
 
       {/* Main Content */}
       <div className="relative z-10 w-full px-6 sm:px-8 text-center text-white max-w-5xl mx-auto">

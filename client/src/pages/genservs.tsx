@@ -80,7 +80,7 @@ const benefits = [
 
 export default function GeneratorServicesPage() {
   return (
-    <div className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
+    <div id="generators" className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
       <Navigation />
       
       {/* Hero Section */}

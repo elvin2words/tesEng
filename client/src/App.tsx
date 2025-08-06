@@ -22,9 +22,23 @@ import NotFound from "@/pages/not-found";
 import smartTESpage from "@/pages/smartTESpage";
 // import AdminDashboard from "./pages/admin-dashboard";
 // import InstallersPage from "./pages/installers";
+import { useEffect } from "react";
 
 
 function Router() {
+
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <Switch>
       <Route path="/" component={Home} />

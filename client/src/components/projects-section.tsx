@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Home, Bot, Building2, Tractor, ArrowRight, MapPin, Zap, Battery, Sun } from "lucide-react";
 import { Link } from "wouter";
+import SmartLink from "./SmartLink";
 
 const featuredProjects = [
   {
@@ -165,7 +166,7 @@ export default function ProjectsSection() {
 
                   {/* Call to Action */}
                   {project.ctaLink && project.ctaText && (
-                    <Link href={project.ctaLink}>
+                    <SmartLink to={project.ctaLink}>
                       <Button
                         variant="ghost"
                         className="w-full hover:underline justify-between text-foreground hover:text-solar-orange hover:bg-solar-orange/10 transition-all"
@@ -173,7 +174,7 @@ export default function ProjectsSection() {
                         {project.ctaText}
                         <ArrowRight className="w-4 h-4" />
                       </Button>
-                    </Link>
+                    </SmartLink>
                   )}
                 </CardContent>
               </Card>

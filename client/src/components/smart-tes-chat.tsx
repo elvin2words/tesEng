@@ -432,7 +432,7 @@ export default function SmartTESChat({ isFloating = true, onSolarSizingRequest, 
         {/* Floating Chat Window */}
         {isOpen && (
           <div 
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-sm"
+            className="fixed inset-0 w-11/12 z-50 flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-sm"
             onClick={() => setIsOpen(false)} // click outside to close
             >
             <Card 

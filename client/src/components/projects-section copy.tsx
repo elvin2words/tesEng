@@ -5,7 +5,7 @@ import { Home, Bot, Building2, Tractor, ArrowRight, MapPin, Zap, Battery, Sun } 
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query"; 
 // import type { Project } from "@shared/schema";
-
+import SmartLink from "./SmartLink";
 
 interface Project {
   id: number;
@@ -225,7 +225,7 @@ export default function ProjectsSection() {
                   </div>
                 </div>
 
-                <Link href={project.ctaLink}>
+                <SmartLink to={project.ctaLink}>
                   <Button 
                     variant="ghost" 
                     className="w-full hover:underline  justify-between text-foreground hover:text-solar-orange hover:bg-solar-orange/10 transition-all"
@@ -233,7 +233,7 @@ export default function ProjectsSection() {
                     {project.ctaText}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
-                </Link>
+                </SmartLink>
 
               </CardContent>
             </Card>
@@ -328,11 +328,11 @@ export default function ProjectsSection() {
                 <p className="text-sm sm:text-base text-muted-foreground mb-4">
                   ✅ SmartTES instantly generates a downloadable system report, and matches the client with certified installers in the area.
                 </p>
-                <Link href="/sizing-tool">
+                <SmartLink to="/sizing-tool">
                   <Button className="bg-solar-orange text-white hover:bg-orange-600 px-6 py-3 text-sm sm:text-base font-medium rounded-full transition-transform transform hover:scale-105">
                     Try SmartTES Sizing Tool
                   </Button>
-                </Link>
+                </SmartLink>
               </div>
             </CardContent>
           </Card>

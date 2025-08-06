@@ -87,6 +87,10 @@ html {
   }
 }
 
+.scroll-offset {
+  scroll-margin-top: 5rem; /* Adjust based on nav height */
+}
+
 @layer components {
   .solar-orange {
     color: var(--solar-orange);
