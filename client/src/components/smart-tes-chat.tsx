@@ -427,7 +427,7 @@ export default function SmartTESChat({
               onClick={(e) => e.stopPropagation()} // prevent click from bubbling up
             >
               {/* Header */}
-              {/* <CardHeader className="bg-gradient-to-r from-solar-orange to-solar-blue text-white p-4 rounded-t-2xl sm:rounded-t-xl">
+              <CardHeader className="bg-gradient-to-r from-solar-orange to-solar-blue text-white p-4 rounded-t-2xl sm:rounded-t-xl">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Zap className="h-5 w-5" />
@@ -437,7 +437,7 @@ export default function SmartTESChat({
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
-              </CardHeader> */}
+              </CardHeader>
 
               <CardHeader className="bg-gradient-to-r from-solar-orange to-solar-blue text-white p-4 rounded-t-xl">
                 <div className="flex items-center justify-between">
