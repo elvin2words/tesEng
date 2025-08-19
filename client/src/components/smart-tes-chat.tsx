@@ -157,7 +157,7 @@ export default function SmartTESChat({
   //   return () => window.removeEventListener('resize', checkMobile);
   // }, []);
 
-// Smart popup logic -periodically show and close
+  // Smart popup logic -periodically show and close
   // useEffect(() => {
   //   if (!isFloating || isOpen) return;
   //   const showSmartPopup = () => {
@@ -260,6 +260,7 @@ export default function SmartTESChat({
   const generateResponse = (userMessage: string): Message => {
     let response = SAMPLE_RESPONSES.default;
     let suggestions: string[] = [];
+    let systemSpecs: SystemSpecs | null = null;
 
     if (userMessage.toLowerCase().includes("pro mode")
       || userMessage.toLowerCase().includes("advanced")) {
@@ -428,7 +429,7 @@ export default function SmartTESChat({
             >
               {/* Header */}
               <CardHeader className="bg-gradient-to-r from-solar-orange to-solar-blue text-white p-4 rounded-t-2xl sm:rounded-t-xl">
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Zap className="h-5 w-5" />
                     <h3 className="text-lg font-bold">SmartTES Assistant</h3>
@@ -436,57 +437,31 @@ export default function SmartTESChat({
                   <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)} className="text-white">
                     <X className="h-4 w-4" />
                   </Button>
-                </div>
-              </CardHeader>
-
-              <CardHeader className="bg-gradient-to-r from-solar-orange to-solar-blue text-white p-4 rounded-t-xl">
+                </div> */}
+                
                 <div className="flex items-center justify-between">
-                  {/* Left: Pro Mode Badge */}
                   <div className="w-1/4 flex justify-start">
                     {proMode && (
                       <Badge className="bg-green-500 text-white text-xs">Pro Mode</Badge>
                     )}
                   </div>
-                  
-                  {/* Center: Icon + Title */}
-                  {/* <div className="flex items-center space-x-3"> */}
-                  {/* <div className="w-2/4 flex flex-col items-center">
-                    <Zap className="h-6 w-6" />
-                    <div>
-                      <h3 className="text-lg font-bold">SmartTES</h3>
-                      <div className="flex space-x-2 mt-1">
-                        <div className="mt-1">
-                        <Badge className="bg-white/20 text-white text-xs">AI-Powered</Badge>
-                        </div>
-                        {proMode && (
-                          <Badge className="bg-green-500 text-white text-xs">Pro Mode</Badge>
-                        )}
-                      </div>
-                    </div>
-                  </div> */}
+                
                   <div className="w-2/4 flex flex-col items-center">
                     <div className="flex items-center space-x-2">
                       <Zap className="h-5 w-5" />
-                      <h3 className="text-base font-bold">SmartTES</h3>
+                      <h3 className="text-lg font-bold">SmartTES Assistant</h3>
                     </div>
-                    <div className="mt-1">
-                      <Badge className="bg-white/20 text-white text-xs">AI-Powered</Badge>
-                    </div>
-                  </div>                  
+                  </div>
 
-                  {/* Right: Close Button */}
                   <div className="w-1/4 flex justify-end">
-                    <Button
-                      variant="ghost"
-                      size="sm"
+                    <Button variant="ghost" size="sm"
                       onClick={() => setIsOpen(false)}
-                      className="text-white hover:bg-white/20"
-                    >
+                      className="text-white hover:bg-white/20" >
                       <X className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
-              </CardHeader>              
+              </CardHeader>
 
               {/* Chat content */}
               <CardContent className="p-0 flex-1 overflow-hidden">
@@ -553,7 +528,7 @@ function ChatInterface({
   return (
     <div className="flex flex-col h-full">
       {/* Quick Actions */}
-      <div className="p-3 border-b border-gray-200 dark:border-gray-700">
+      <div className="px-3 pb-3 border-b border-gray-200 dark:border-gray-700">
         <div className="grid grid-cols-2 gap-2">
           {QUICK_ACTIONS.map((action) => (
             <Button
