@@ -253,7 +253,7 @@ export default function CommercialPage() {
       {/* SmartTES Integration */}
       {showChat && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl h-[80vh] relative">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl h-[80vh] relative ">
             <Button
               variant="ghost"
               onClick={() => setShowChat(false)}

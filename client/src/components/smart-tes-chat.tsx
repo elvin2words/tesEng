@@ -73,10 +73,10 @@ const SAMPLE_RESPONSES = {
 };
 
 const QUICK_ACTIONS = [
-  { icon: Calculator, text: "Advanced system sizing", action: "sizing" },
-  { icon: MapPin, text: "Location optimization", action: "location" },
+  { icon: Calculator, text: "Advanced Sizing", action: "sizing" },
+  { icon: MapPin, text: "Site Optimization", action: "location" },
   { icon: Settings, text: "Enable Pro Mode", action: "promode" },
-  { icon: FileText, text: "Generate quote", action: "quote" }
+  { icon: FileText, text: "Generate Quote", action: "quote" }
 ];
 
 // ------------------ MAIN COMPONENT -------------------
@@ -105,10 +105,15 @@ export default function SmartTESChat({
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isVisible, setIsVisible] = useState(false);
-  const popupTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // const popupTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // safer timeout refs
+  const popupTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 
   const [vh, setVh] = useState(window.innerHeight);
 

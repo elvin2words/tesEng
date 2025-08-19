@@ -39,6 +39,18 @@ function Router() {
     }
   }, []);
 
+  
+  useEffect(() => {
+    // Run on every route change
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
+
+    // Optional: force remove Tailwind classes that lock scroll
+    document.body.classList.remove("overflow-hidden", "h-screen");
+    document.documentElement.classList.remove("overflow-hidden", "h-screen");
+  },);
+
+
   return (
     <Switch>
       <Route path="/" component={Home} />
