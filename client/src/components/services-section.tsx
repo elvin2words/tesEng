@@ -1,3 +1,5 @@
+//components/services-section.tsx
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Sun, Factory, Wrench, Battery, Lightbulb, GraduationCap, Check, ChevronDown } from "lucide-react";
 import { Link } from "wouter"; // or 'next/link' or 'react-router-dom'

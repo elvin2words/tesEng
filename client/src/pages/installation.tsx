@@ -1,3 +1,4 @@
+// pages/installation.tsx
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
@@ -7,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Settings, Clock, Shield, CheckCircle, Users, MapPin, Sun, Zap } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const installationServices = [
   {
@@ -56,6 +58,27 @@ const certifications = [
 export default function InstallationPage() {
   return (
     <div id="install" className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
+      {/* ✅ Page-level SEO */}
+      <Helmet>
+        <title>Solar Installation Services in Zimbabwe | TES</title>
+        <meta
+          name="description"
+          content="Professional solar installation services across Zimbabwe. Residential, commercial, industrial, and off-grid solar systems installed by certified experts."
+        />
+        <meta name="keywords" content="Solar installation Zimbabwe, Residential solar, Commercial solar, Off-grid solar, Solar companies Harare" />
+        
+        <meta property="og:title" content="Solar Installation Services in Zimbabwe | TES" />
+        <meta property="og:description" content="From rooftops to industrial complexes, TES delivers safe, efficient, and code-compliant solar installations." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tesengineering.com/services/installation" />
+        <meta property="og:image" content="https://tesengineering.com/images/installation-preview.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Solar Installation Services in Zimbabwe | TES" />
+        <meta name="twitter:description" content="Expert solar installation services for homes, businesses, and industries across Zimbabwe." />
+        <meta name="twitter:image" content="https://tesengineering.com/images/installation-preview.png" />
+      </Helmet>
+
       <Navigation />
       
       {/* Hero Section */}

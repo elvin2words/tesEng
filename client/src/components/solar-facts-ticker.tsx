@@ -1,3 +1,4 @@
+// components/solar-facts-ticker.tsx 
 
 import { useState, useEffect } from 'react';
 import { Sun, Zap, Leaf, Globe } from 'lucide-react'; 

@@ -1,3 +1,6 @@
+// components/navigation.tsx
+
+
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon, ChevronDown, Bot, Search, Phone, 
   MapPin, Instagram, Facebook, Hammer, Wrench, Package, Cog, 
@@ -27,11 +30,11 @@ export default function Navigation() {
   const mobilePopupRef = useRef<HTMLDivElement>(null);
   
   const servicesDropdown = [
-    { name: "Installation", description: "Professional setup", link: "/installation#install", icon: Hammer },
-    { name: "Maintenance", description: "System upkeep", link: "/maintenance#maintain", icon: Wrench },
-    { name: "Equipment Supply", description: "Solar, LV, HV Systems gear ", link: "/supply#equipment", icon: Package },
-    { name: "Generator Services", description: "Supply & care", link: "/genservs#generators", icon: Cog },
-    { name: "Security Systems", description: "Digital protection", link: "/secsys#security", icon: ShieldCheck },
+    { name: "Installation", description: "Professional setup", link: "/services/installation#install", icon: Hammer },
+    { name: "Maintenance", description: "System upkeep", link: "/services/maintenance#maintain", icon: Wrench },
+    { name: "Equipment Supply", description: "Solar, LV, HV Systems gear ", link: "/services/supply#equipment", icon: Package },
+    { name: "Generator Services", description: "Supply & care", link: "/services/genservs#generators", icon: Cog },
+    { name: "Security Systems", description: "Digital protection", link: "/services/secsys#security", icon: ShieldCheck },
   ];
 
   const projectsDropdown = [

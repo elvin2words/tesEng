@@ -1,3 +1,5 @@
+// pages/residential.tsx
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +10,7 @@ import Footer from "@/components/footer";
 import SmartTESChat from "@/components/smart-tes-chat";
 import ContactSection from "@/components/contact-section";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 const benefits = [
   "Eliminate electricity bills permanently",

@@ -1,3 +1,4 @@
+// pages/maintenance.tsx
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
@@ -7,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Calendar, Settings, AlertTriangle, CheckCircle, TrendingUp, Shield, Wrench } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const maintenanceServices = [
   {
@@ -31,7 +33,7 @@ const maintenanceServices = [
     icon: Wrench,
     title: "Component Replacement",
     description: "Professional replacement of faulty or aging system components",
-    features: ["Quality parts", "Warranty coverage", "Professional installation", "System testing", "Documentation"]
+    features: ["Quality parts", "Warranty coverage", "Professional maintenance", "System testing", "Documentation"]
   }
 ];
 
@@ -52,6 +54,27 @@ const benefits = [
 export default function MaintenancePage() {
   return (
     <div id="maintain" className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
+      {/* ✅ Page-level SEO */}
+      <Helmet>
+        <title>Solar, Electrical Systems Maintenance Services in Zimbabwe | TES</title>
+        <meta
+          name="description"
+          content="Professional electrical systemesmaintainance services across Zimbabwe. Residential, commercial, industrial, and off-grid solar systems installed by certified experts."
+        />
+        <meta name="keywords" content="Solar Maintenance Zimbabwe, Residential solar, Commercial solar, Off-grid solar, Solar companies Harare, Inverter Repair" />
+        
+        <meta property="og:title" content="Electrical Maintenance Services in Zimbabwe | TES" />
+        <meta property="og:description" content="From rooftops to industrial complexes, TES delivers safe, efficient, and code-compliant solar  and maintain them." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tesengineering.com/services/maintenance" />
+        <meta property="og:image" content="https://tesengineering.com/images/maintenance-preview.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Solar maintenance Services in Zimbabwe | TES" />
+        <meta name="twitter:description" content="Expert solar maintenance services for homes, businesses, and industries across Zimbabwe." />
+        <meta name="twitter:image" content="https://tesengineering.com/images/maintenance-preview.png" />
+      </Helmet>
+      
       <Navigation />
       
       {/* Hero Section */}

@@ -1,3 +1,5 @@
+//components/about-section.tsx
+
 export default function AboutSection() {
   return (
     <section id="about" className="py-16 sm:py-20 bg-white dark:bg-gray-900 transition-colors duration-300">

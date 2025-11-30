@@ -1,3 +1,4 @@
+//pages/secsys.tsx
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
@@ -7,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Camera, Wifi, Smartphone, Lock, Eye, CheckCircle, AlertTriangle } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const securityServices = [
   {
@@ -74,6 +76,29 @@ const technologies = [
 export default function SecuritySystemsPage() {
   return (
     <div id="security" className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
+      {/* ✅ SEO */}
+      <Helmet>
+        <title>Security Systems in Zimbabwe | CCTV, Access Control & Smart Security</title>
+        <meta
+          name="description"
+          content="TES provides advanced security solutions in Zimbabwe, including CCTV systems, access control, smart IoT security, and 24/7 monitoring for homes, businesses, and industries."
+        />
+        <meta name="keywords" content="Security systems Zimbabwe, CCTV Harare, Access control, Smart security, Surveillance cameras, Alarm systems, Industrial security" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Security Systems in Zimbabwe | CCTV & Smart Solutions" />
+        <meta property="og:description" content="Protect your home, business, or industrial site with TES’s CCTV, access control, and smart security systems." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tesengineering.com/services/security" />
+        <meta property="og:image" content="https://tesengineering.com/images/security-preview.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Security Systems in Zimbabwe | CCTV & Smart Solutions" />
+        <meta name="twitter:description" content="TES installs CCTV, access control, smart IoT security, and 24/7 monitoring services." />
+        <meta name="twitter:image" content="https://tesengineering.com/images/security-preview.png" />
+      </Helmet>
+      
       <Navigation />
       
       {/* Hero Section */}

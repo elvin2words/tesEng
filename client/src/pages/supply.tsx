@@ -1,3 +1,4 @@
+//pages/supply.tsx 
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
@@ -7,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sun, Battery, Zap, Shield, Star, Package, TrendingUp, CheckCircle } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const productCategories = [
   {
@@ -84,6 +86,29 @@ const specifications = [
 export default function SupplyPage() {
   return (
     <div id="equipment" className="min-h-screen bg-background dark:bg-gray-950 transition-colors duration-300">
+      {/* ✅ SEO */}
+      <Helmet>
+        <title>Solar Equipment Supply Zimbabwe | Panels, Inverters & Batteries</title>
+        <meta
+          name="description"
+          content="TES supplies high-quality Tier-1 solar equipment in Zimbabwe. Get solar panels, inverters, batteries, and components from trusted global brands."
+        />
+        <meta name="keywords" content="Solar equipment Zimbabwe, Buy solar panels, Solar inverters, Solar batteries, Tier 1 solar, Renewable energy supplies" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Solar Equipment Supply Zimbabwe | Panels, Inverters & Batteries" />
+        <meta property="og:description" content="Get premium solar equipment in Zimbabwe. We supply Tier-1 panels, inverters, batteries, and system components." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tesengineering.com/services/supply" />
+        <meta property="og:image" content="https://tesengineering.com/images/supply-preview.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Solar Equipment Supply Zimbabwe | Panels, Inverters & Batteries" />
+        <meta name="twitter:description" content="Source trusted Tier-1 solar panels, inverters, and batteries for residential, commercial, and industrial projects." />
+        <meta name="twitter:image" content="https://tesengineering.com/images/supply-preview.png" />
+      </Helmet>
+      
       <Navigation />
       
       {/* Hero Section */}

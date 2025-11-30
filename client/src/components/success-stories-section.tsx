@@ -1,3 +1,5 @@
+// compnents/success-stories
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Building2, Stethoscope, School } from "lucide-react";
 

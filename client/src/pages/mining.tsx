@@ -7,6 +7,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import SmartTESChat from "@/components/smart-tes-chat";
 import ContactSection from "@/components/contact-section";
+import { Helmet } from "react-helmet-async";
 
 const benefits = [
   "Massive fuel cost savings (up to 80%)",

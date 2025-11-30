@@ -62,11 +62,11 @@ function Router() {
       <Route path="/mining" component={MiningPage} />
       <Route path="/agricultural" component={AgriculturalPage} />
       <Route path="/installers" component={Installers} />
-      <Route path="/installation" component={Installation} />
-      <Route path="/maintenance" component={Maintenance} />
-      <Route path="/supply" component={Supply} />
-      <Route path="/genservs" component={GeneratorServices} />
-      <Route path="/secsys" component={SecuritySystems} />
+      <Route path="/services/installation" component={Installation} />
+      <Route path="/services/maintenance" component={Maintenance} />
+      <Route path="/services/supply" component={Supply} />
+      <Route path="/services/genservs" component={GeneratorServices} />
+      <Route path="/services/secsys" component={SecuritySystems} />
       {/* <Route path="/admin" component={AdminDashboard} /> */}
       <Route component={NotFound} />
     </Switch>
